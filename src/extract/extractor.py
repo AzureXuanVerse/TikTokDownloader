@@ -80,6 +80,7 @@ class Extractor:
         self.log: "BaseLogger" = params.logger
         self.date_format: str = params.date_format
         self.cleaner = params.CLEANER
+        self.download = params.download
         self.original_quality: bool = params.original_quality
         self.client = params.client
         self.max_retry = params.max_retry
@@ -576,7 +577,7 @@ class Extractor:
                 bit_rate[0],
                 f"play_addr.url_list[{VIDEO_INDEX}]",
             )
-        if use_original_quality and self.original_quality:
+        if use_original_quality and self.download and self.original_quality:
             uri = self.safe_extract(data, "video.play_addr.uri")
             if uri:
                 original_url = self.generate_original_quality_url(uri)
